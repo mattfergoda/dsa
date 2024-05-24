@@ -7,14 +7,16 @@ class Solution(object):
         """
         
         max_area = 0
+        l = 0
+        r = len(height) - 1
 
-        for i in range(len(height)):
-            h1 = height[i]
-            for j in range(i, len(height)):
-                h2 = height[j]
-                area = min(h1, h2) * abs(j - i)
-                if area > max_area:
-                    max_area = area
+        while l < r:
+            max_area = max(max_area, min(height[l], height[r]) * (r - l))
+
+            if height[l] > height[r]:
+                r -= 1
+            else:
+                l += 1
 
         return max_area
 
