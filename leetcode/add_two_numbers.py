@@ -28,9 +28,10 @@ class Solution(object):
     def numberToList(self, num):
         num = str(num)
         old_node = ListNode(num[0])
+        new_node = None
         for i in range(1, len(num)):
             new_node = ListNode(num[i])
             new_node.next = old_node
             old_node = new_node
 
-        return new_node
+        return old_node
