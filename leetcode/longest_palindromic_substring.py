@@ -1,38 +1,38 @@
 class Solution(object):
-    def isPalindrome(self, s):
-            if len(s) == 0:
-                return False
-
-            l = 0
-            r = len(s) - 1
-            mid = len(s) // 2
-
-            while l < mid:
-                if s[l] != s[r]:
-                    return False
-                else:
-                    l += 1
-                    r -= 1
-
-            return True
-        
     def longestPalindrome(self, s):
         """
         :type s: str
         :rtype: str
         """
 
-        if len(s) == 1:
-            return s
-        
-        r = 1
-        max_len = 0
-        palindrome = ""
+        l_max = 0
+        r_max = 0
+        res_len = 0
 
-        for l in range(len(s)):
-            for r in range (l + 1, len(s)):
-                if self.isPalindrome(s[l:r]) and len(s[l:r]) > max_len:
-                    max_len = len(s[l:r])
-                    palindrome = s[l:r]
+        for i in range(len(s)):
+            l = i
+            r = i
 
-        return palindrome
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                if (r - l + 1) > res_len:
+                    l_max = l
+                    r_max = r
+                    res_len = r - l + 1
+
+                l -= 1
+                r += 1
+
+            l = i
+            r = i + 1
+
+            while l >= 0 and r < len(s) and s[l] == s[r]:
+                if (r - l + 1) > res_len:
+                    l_max = l
+                    r_max = r
+                    res_len = r - l + 1
+
+                l -= 1
+                r += 1
+
+        return s[l_max : r_max + 1]
+
